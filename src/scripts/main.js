@@ -16,6 +16,7 @@ import router from '@components/router/router';
 import home from '../pages/home/home';
 import article from '../pages/article/article';
 import sharing from '../components/sharing/sharing';
+import slider from "../components/slider/slider";
 
 // eslint-disable-next-line no-underscore-dangle
 window._debounce = debounce;
@@ -42,13 +43,7 @@ const resize = () => {
 // добавить скрипты для инициализации при переходах
 const scriptsInit = [
 	// активируем нужные модули которые будут использоваться и которые должны обновлять при переходах между страницами
-	lazyLoad.init,
-	scrollToAnchor.init,
-	lazyBlur.init,
-	sharing.init,
 
-	home.init,
-	article.init,
 ];
 
 // добавить скрипты для удаленния данных при уходе
@@ -60,11 +55,20 @@ const init = () => {
 	uaParser.init();
 	actualYear.init();
 	vhFix.init();
+	lazyLoad.init();
+	scrollToAnchor.init();
+	lazyBlur.init();
+	sharing.init();
 	// закоментировать или удалить если SPA поведение не требуется
-	router.init(scriptsInit, scriptsDestroy);
+	// router.init(scriptsInit, scriptsDestroy);
+	home.init();
+	article.init();
+	slider.init();
+
 
 	resizeWidth = innerWidth;
 	window.addEventListener('resize', _debounce(resize, 500));
+
 };
 
 document.addEventListener('DOMContentLoaded', init);
